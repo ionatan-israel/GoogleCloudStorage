@@ -4,7 +4,7 @@ from setuptools import setup
 exec(open("django_google_storage/version.py").read())
 
 setup(
-    name='django-google-storage',
+    name='django_google_storage',
     version=__version__,
     description='Class Client for Google Cloud Storage.',
     author='Jonatan Rodriguez',
