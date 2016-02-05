@@ -13,7 +13,7 @@ setup(
     maintainer_email='jrperdomoz@gmail.com',
     url='https://github.com/jrperdomoz/GoogleCloudStorage',
     license="BSD",
-    # packages=[''],
+    packages=['django_google_storage'],
     # long_description=open("README.md").read(),
     classifiers=[
         'Development Status :: 3 - Alpha'
