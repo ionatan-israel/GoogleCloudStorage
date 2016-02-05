@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from setuptools import setup
 
-exec(open("django_google_storage.py").read())
+exec(open("django_google_storage/version.py").read())
 
 setup(
     name='khipu',
