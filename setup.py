@@ -4,9 +4,9 @@ from setuptools import setup
 exec(open("django_google_storage/version.py").read())
 
 setup(
-    name='khipu',
+    name='django-google-storage',
     version=__version__,
-    description='A client for the khipu API.',
+    description='Class Client for Google Cloud Storage.',
     author='Jonatan Rodriguez',
     author_email='jrperdomoz@gmail.com',
     maintainer='Jonatan Rodriguez',
