@@ -1,4 +1,7 @@
+import hashlib
 import os
+import random
+
 from django.core.files.base import ContentFile
 from django.core.files.storage import Storage
 from django.utils.deconstruct import deconstructible
@@ -21,7 +24,13 @@ class GoogleCloudStorage(Storage):
         return ContentFile(self.bucket.get_blob(name))
 
     def _save(self, name, content):
-        blob = self.bucket.blob(content.name)
+        _file = content.read()
+        name = content.name.split('/')[-1]
+        ext = content.name.split('.')[-1]
+        if self.exists(name):
+            _hash = hashlib.sha1(str(random.random())).hexdigest()[:13]
+            name = '{}_{}.{}'.format(name.split('.')[0], _hash, ext)
+        blob = self.bucket.blob(name)
         blob.upload_from_file(content.file, size=content.size)
         blob.make_public()
         return blob.public_url
@@ -33,7 +42,7 @@ class GoogleCloudStorage(Storage):
         self.bucket.get_blob(self._name(name)).delete()
 
     def exists(self, name):
-        return self.bucket.blob('name').exists()
+        return self.bucket.blob(name).exists()
 
     def get_available_name(self, name):
         return self._name(name)
