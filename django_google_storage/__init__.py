@@ -24,14 +24,13 @@ class GoogleCloudStorage(Storage):
         return ContentFile(self.bucket.get_blob(name))
 
     def _save(self, name, content):
-        _file = content.read()
         name = content.name.split('/')[-1]
         ext = content.name.split('.')[-1]
         if self.exists(name):
             _hash = hashlib.sha1(str(random.random())).hexdigest()[:13]
             name = '{}_{}.{}'.format(name.split('.')[0], _hash, ext)
         blob = self.bucket.blob(name)
-        blob.upload_from_file(content.file, size=content.size)
+        blob.upload_from_file(content.read(), size=content.size)
         blob.make_public()
         return blob.public_url
 
