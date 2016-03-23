@@ -30,7 +30,7 @@ class GoogleCloudStorage(Storage):
             _hash = hashlib.sha1(str(random.random())).hexdigest()[:13]
             name = '{}_{}.{}'.format(name.split('.')[0], _hash, ext)
         blob = self.bucket.blob(name)
-        blob.upload_from_file(content.read(), size=content.size)
+        blob.upload_from_file(content.file, size=content.size)
         blob.make_public()
         return blob.public_url
 
